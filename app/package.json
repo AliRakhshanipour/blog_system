@@ -1,25 +1,41 @@
 {
-    "name": "express-blog",
-    "version": "1.0.0",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "dev": "nodemon index.js"
-    },
-    "dependencies": {
-        "argon2": "^0.40.3",
-        "dotenv": "^16.4.5",
-        "express": "^4.17.1",
-        "morgan": "^1.10.0",
-        "passport": "^0.7.0",
-        "passport-jwt": "^4.0.1",
-        "passport-local": "^1.0.0",
-        "pg": "^8.12.0",
-        "pg-hstore": "^2.3.4",
-        "sequelize": "^6.37.3"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.7"
-    },
-    "type": "module"
+  "name": "express-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jasmine",
+    "test:watch": "nodemon --exec 'npx jasmine' spec/**/*.spec.js"
+  },
+  "dependencies": {
+    "argon2": "^0.40.3",
+    "auto-bind": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.17.1",
+    "express-validator": "^7.2.0",
+    "http-status-codes": "^2.3.0",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "babel-jest": "^29.7.0",
+    "esm": "^3.2.25",
+    "jasmine": "^5.2.0",
+    "nodemon": "^2.0.7",
+    "sinon": "^18.0.0",
+    "supertest": "^7.0.0"
+  },
+  "type": "module"
 }

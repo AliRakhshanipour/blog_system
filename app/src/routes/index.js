@@ -1,33 +1,29 @@
 import { Router } from 'express';
-import { registerRoutes } from '../utils/route-handler.js';
+import userRoutes from './user.routes.js';
 
 const router = Router();
 
 /**
- * Array of route configurations for class-related operations.
+ * Main routes for the application.
  *
- * @constant
- * @type {Array}
- * @property {string} method - HTTP method for the route (e.g., 'post', 'get', 'patch', 'delete').
- * @property {string} path - Path for the route (e.g., '/create', '/list', '/:id/update').
- * @property {Array<Function>} [middlewares] - Optional array of middleware functions to apply to the route.
- * @property {Array<Function>} handler - Array of handler functions for the route.
+ * This module combines routes from different route files and attaches them to the main router.
+ *
+ * @module mainroutes
  */
-const mainRoutes = [
-  {
-    method: 'get',
-    path: '',
-    middlewares: [],
-    handler: [],
-  }
-];
 
 /**
- * Registers class-related routes with the Express router.
+ * Array of route objects to be registered.
+ * Each object contains a path and a router.
  *
- * This function iterates over the `classRoutes` array and registers each route with the corresponding HTTP method and path.
- * The `registerRoutes` utility function is used to handle the registration process.
+ * @const {Array<{path: string, router: Router}>}
  */
-registerRoutes(router, mainRoutes);
+const mainRoutes = [{ path: '/users', router: userRoutes }];
+
+/**
+ * Register each route with the main router.
+ */
+mainRoutes.forEach((route) => {
+  router.use(route.path, route.router);
+});
 
 export default router;

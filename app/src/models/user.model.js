@@ -68,17 +68,16 @@ export const userInit = (sequelize) => {
         defaultValue: true, // Default to active
       },
     },
+
     {
       sequelize,
       modelName: 'User',
       tableName: 'users',
       hooks: {
         beforeCreate: async (user) => {
-          // Hash the password before creating the user
           user.password = await User.hashPassword(user.password);
         },
         beforeUpdate: async (user) => {
-          // Hash the password before updating the user, if it has been changed
           if (user.changed('password')) {
             user.password = await User.hashPassword(user.password);
           }

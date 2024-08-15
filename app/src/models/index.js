@@ -2,7 +2,7 @@ import { sequelize } from '../configs/db.conf.js';
 import setupAssociations from '../utils/associate-models.js';
 import { userInit } from './user.model.js';
 
-const models = {
+export const models = {
   UserModel: userInit(sequelize),
 };
 
