@@ -18,7 +18,7 @@ const apiPaths = [
 ];
 
 // Swagger definition
-const swaggerDefinition = {
+export const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
     title: 'Blog Service API Documentation',
@@ -47,20 +47,20 @@ const swaggerDefinition = {
     },
   ],
   tags: [
-    {
-      name: 'Authentication',
-      description: 'Endpoints related to authentication and authorization',
-    },
+    // {
+    //   name: 'Authentication',
+    //   description: 'Endpoints related to authentication and authorization',
+    // },
     { name: 'Users', description: 'Endpoints related to user operations' },
-    { name: 'Posts', description: 'Endpoints related to post operations' },
-    {
-      name: 'Comments',
-      description: 'Endpoints related to comment operations',
-    },
-    {
-      name: 'Categories',
-      description: 'Endpoints related to category operations',
-    },
+    // { name: 'Posts', description: 'Endpoints related to post operations' },
+    // {
+    //   name: 'Comments',
+    //   description: 'Endpoints related to comment operations',
+    // },
+    // {
+    //   name: 'Categories',
+    //   description: 'Endpoints related to category operations',
+    // },
   ],
 };
 

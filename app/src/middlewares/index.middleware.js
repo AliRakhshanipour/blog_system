@@ -5,22 +5,21 @@ import morgan from 'morgan';
 import path from 'path';
 config();
 
-const port = process.env.PORT;
 // Array of allowed origins
 const allowedOrigins = [
-  `http://127.0.0.1:${port}`, // Local development
-  `http://localhost:${port}`, // Another allowed origin
+  'http://localhost', // If you're accessing via localhost
+  'http://127.0.0.1', // Another localhost option
+  // Add any other origins that should be allowed
 ];
 
 // CORS configuration
 const corsOptions = {
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true); // Allow the request
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS')); // Reject the request
+      callback(new Error('Not allowed by CORS'));
     }
   },
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],

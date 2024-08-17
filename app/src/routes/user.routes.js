@@ -1,13 +1,20 @@
 import { Router } from 'express';
 import { UserHandler } from '../handlers/user/user.handler.js';
-import { validateUserCreation } from '../handlers/user/user.validation.js';
+import {
+  validateUserCreation,
+  validateUserId,
+  validateUserUpdate,
+} from '../handlers/user/user.validation.js';
 import { registerRoutes } from '../utils/route-handler.js';
 
 const router = Router();
 
 /**
  * Array of route configurations for class-related operations.
- *
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User management
  * @constant
  * @type {Array}
  * @property {string} method - HTTP method for the route (e.g., 'post', 'get', 'patch', 'delete').
@@ -21,6 +28,31 @@ const userRoutes = [
     path: '/create-user',
     middlewares: [validateUserCreation],
     handler: [UserHandler.createUser],
+  },
+
+  {
+    method: 'get',
+    path: '/list',
+    middlewares: [],
+    handler: [UserHandler.listUsers],
+  },
+  {
+    method: 'get',
+    path: '/:id',
+    middlewares: [validateUserId],
+    handler: [UserHandler.getUser],
+  },
+  {
+    method: 'patch',
+    path: '/update/:id',
+    middlewares: [validateUserId, validateUserUpdate],
+    handler: [UserHandler.updateUser],
+  },
+  {
+    method: 'delete',
+    path: '/delete/:id',
+    middlewares: [validateUserId],
+    handler: [UserHandler.deleteUser],
   },
 ];
 
