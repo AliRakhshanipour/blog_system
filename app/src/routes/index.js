@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import authRoutes from './auth.routes.js';
 import userRoutes from './user.routes.js';
 
 const router = Router();
@@ -17,7 +18,10 @@ const router = Router();
  *
  * @const {Array<{path: string, router: Router}>}
  */
-const mainRoutes = [{ path: '/users', router: userRoutes }];
+const mainRoutes = [
+  { path: '/users', router: userRoutes },
+  { path: '/auth', router: authRoutes },
+];
 
 /**
  * Register each route with the main router.

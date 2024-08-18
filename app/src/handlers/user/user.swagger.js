@@ -59,11 +59,28 @@
  *           example: User created successfully
  *         user:
  *           $ref: '#/components/schemas/User'
+ *     UserUpdateRequest:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
+ *           example: johndoe
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: johndoe@example.com
+ *         phone:
+ *           type: string
+ *           example: '1234567890'
+ *         role:
+ *           type: string
+ *           enum: ['مدیر', 'کاربر', 'مهمان']
+ *       required: []  # No required fields
  */
 
 /**
  * @swagger
- * /users/create-user:
+ * /users:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
@@ -107,6 +124,31 @@
  *   get:
  *     summary: Retrieve a list of users
  *     tags: [Users]
+ *     parameters:
+ *       - in: query
+ *         name: phone
+ *         required: false
+ *         description: Filter users by phone number (partial match)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: username
+ *         required: false
+ *         description: Filter users by username (partial match)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: email
+ *         required: false
+ *         description: Filter users by email (partial match)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: isActive
+ *         required: false
+ *         description: Filter users by active status (true or false)
+ *         schema:
+ *           type: boolean
  *     responses:
  *       '200':
  *         description: A list of users
@@ -168,7 +210,7 @@
 
 /**
  * @swagger
- * /users/{id}:
+ * /users/update/{id}:
  *   patch:
  *     summary: Edit a user by ID
  *     tags: [Users]
@@ -184,21 +226,13 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *                 example: johndoe
- *               email:
- *                 type: string
- *                 format: email
- *                 example: johndoe@example.com
- *               phone:
- *                 type: string
- *                 example: '1234567890'
- *               role:
- *                 type: string
- *                 enum: ['مدیر', 'کاربر', 'مهمان']
+ *             $ref: '#/components/schemas/UserUpdateRequest'
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             $ref: '#/components/schemas/UserUpdateRequest'
+ *         multipart/form-data:
+ *           schema:
+ *             $ref: '#/components/schemas/UserUpdateRequest'
  *     responses:
  *       '200':
  *         description: User updated successfully

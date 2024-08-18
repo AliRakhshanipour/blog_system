@@ -2,7 +2,13 @@ import argon2 from 'argon2';
 import { DataTypes, Model } from 'sequelize';
 
 class User extends Model {
-  static associate(models) {}
+  static associate(models) {
+    User.hasOne(models.ImageModel, {
+      foreignKey: 'imageableId',
+      as: 'profilePicture',
+      constraints: false,
+    });
+  }
 
   // Method to hash the password
   static async hashPassword(password) {
@@ -61,6 +67,14 @@ export const userInit = (sequelize) => {
         type: DataTypes.ENUM('مدیر', 'کاربر', 'مهمان'), // Farsi names for roles
         allowNull: false,
         defaultValue: 'کاربر', // Default role in Farsi
+      },
+      otp: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      otpExpiry: {
+        type: DataTypes.DATE,
+        allowNull: true,
       },
       isActive: {
         type: DataTypes.BOOLEAN,

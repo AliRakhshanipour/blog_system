@@ -5,9 +5,13 @@ import {
   validateUserId,
   validateUserUpdate,
 } from '../handlers/user/user.validation.js';
+import { AuthorizeMiddleware } from '../middlewares/auth/auth.middlewares.js';
 import { registerRoutes } from '../utils/route-handler.js';
 
 const router = Router();
+
+const { isAuthenticated, ensureRoles, ensureRolesOrSuperuser } =
+  AuthorizeMiddleware;
 
 /**
  * Array of route configurations for class-related operations.
@@ -26,32 +30,37 @@ const userRoutes = [
   {
     method: 'post',
     path: '/create-user',
-    middlewares: [validateUserCreation],
+    middlewares: [isAuthenticated, ensureRoles('مدیر'), validateUserCreation],
     handler: [UserHandler.createUser],
   },
 
   {
     method: 'get',
     path: '/list',
-    middlewares: [],
+    middlewares: [isAuthenticated, ensureRoles('مدیر')],
     handler: [UserHandler.listUsers],
   },
   {
     method: 'get',
     path: '/:id',
-    middlewares: [validateUserId],
+    middlewares: [isAuthenticated, ensureRoles('مدیر'), validateUserId],
     handler: [UserHandler.getUser],
   },
   {
     method: 'patch',
     path: '/update/:id',
-    middlewares: [validateUserId, validateUserUpdate],
+    middlewares: [
+      isAuthenticated,
+      ensureRoles('مدیر'),
+      validateUserId,
+      validateUserUpdate,
+    ],
     handler: [UserHandler.updateUser],
   },
   {
     method: 'delete',
     path: '/delete/:id',
-    middlewares: [validateUserId],
+    middlewares: [isAuthenticated, ensureRoles('مدیر'), validateUserId],
     handler: [UserHandler.deleteUser],
   },
 ];

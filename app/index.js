@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import express from 'express';
 import { setupSwagger } from './src/configs/openapi.conf.js';
+import './src/configs/passport.conf.js';
 import { ErrorHandlers } from './src/error/error.handlers.js';
 import { middlewares } from './src/middlewares/index.middleware.js';
 import { dbSynchronize } from './src/models/index.js';
