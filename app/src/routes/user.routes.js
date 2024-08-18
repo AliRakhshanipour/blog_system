@@ -6,6 +6,7 @@ import {
   validateUserUpdate,
 } from '../handlers/user/user.validation.js';
 import { AuthorizeMiddleware } from '../middlewares/auth/auth.middlewares.js';
+import { UserService } from '../services/user/user.service.js';
 import { registerRoutes } from '../utils/route-handler.js';
 
 const router = Router();
@@ -33,11 +34,20 @@ const userRoutes = [
     middlewares: [isAuthenticated, ensureRoles('مدیر'), validateUserCreation],
     handler: [UserHandler.createUser],
   },
+  {
+    method: 'post',
+    path: '/change-password',
+    middlewares: [isAuthenticated],
+    handler: [UserService.changePassword],
+  },
 
   {
     method: 'get',
     path: '/list',
-    middlewares: [isAuthenticated, ensureRoles('مدیر')],
+    middlewares: [
+      isAuthenticated,
+      //  ensureRoles('مدیر')
+    ],
     handler: [UserHandler.listUsers],
   },
   {
@@ -45,6 +55,12 @@ const userRoutes = [
     path: '/:id',
     middlewares: [isAuthenticated, ensureRoles('مدیر'), validateUserId],
     handler: [UserHandler.getUser],
+  },
+  {
+    method: 'get',
+    path: '/:id/profile',
+    middlewares: [isAuthenticated, validateUserId],
+    handler: [UserService.getProfile],
   },
   {
     method: 'patch',

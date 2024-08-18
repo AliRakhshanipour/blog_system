@@ -94,7 +94,7 @@ export const AuthService = (() => {
         ) {
           return res.status(StatusCodes.UNAUTHORIZED).json({
             success: false,
-            message: AuthMsg().UNAUTHORIZED,
+            message: AuthMsg().WRONG_PASSWORD,
           });
         }
 

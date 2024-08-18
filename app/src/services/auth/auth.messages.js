@@ -17,5 +17,6 @@ export function AuthMsg() {
     OTP_EXPIRED: 'رمز موقت شما نامعتبر است',
     UNAUTHORIZED: 'شما به این مسیر دسترسی ندارید',
     VERIFIES_TOKEN: 'احراز هویت با موفقیت انجام شد',
+    WRONG_PASSWORD: 'رمز عبور صحیح نیست',
   });
 }

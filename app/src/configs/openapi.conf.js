@@ -47,10 +47,10 @@ export const swaggerDefinition = {
     },
   ],
   tags: [
-    // {
-    //   name: 'Authentication',
-    //   description: 'Endpoints related to authentication and authorization',
-    // },
+    {
+      name: 'Authentication',
+      description: 'Endpoints related to authentication and authorization',
+    },
     { name: 'Users', description: 'Endpoints related to user operations' },
     // { name: 'Posts', description: 'Endpoints related to post operations' },
     // {
